@@ -1,19 +1,117 @@
-//this function replace the new line character with end of string character of the command received from the user//
-void replaceNewLine(adventureGame *ag){
+//this function process all the command received from the user//
+int processCommand(adventureGame *ag) {
 
-    //iterates over every element of the command array to replace the new line character with EOS
-    for (int i=0;ag->command[i]!='\0';i++){
-        if (ag->command[i]=='\n') {
-            ag->command[i]='\0';
-            //return;
-        }
+    //calls function to replace new line character with end of string character//
+    replaceNewLine(ag);
+
+    //copy current command to lastCommand if command is not empty//
+    if (strlen(ag->command)!=0) {
+        strcpy(ag->lastCommand,ag->command);
     }
 
-    //iterates over every element of the lastCommand array to replace the new line character with EOS
-    for (int i=0;ag->lastCommand[i]!='\0';i++){
-        if (ag->lastCommand[i]=='\n') {
-            ag->lastCommand[i]='\0';
-            //return;
-        }
+    //copy lastCommand to current command if command is empty//
+    if (strlen(ag->command)==0) {
+        strcpy(ag->command,ag->lastCommand);
     }
+
+    //checks if user have entered a 'exit' command//
+    if (strcasecmp(ag->command,"exit")==0) {
+        printf("You exit the game.\n");
+
+        //quite the game by returning 0
+        return(0);
+    }
+
+    //checks if user have entered a 'look' command//
+    if (strcasecmp(ag->command,"look")==0 || strcasecmp(ag->command,"l")==0) {
+        //call function to process the look command//
+        processLook(ag);
+        return(1);
+    }
+
+    //process command that relates to killing monster with the 'k' as the first word of the command//
+    if (strncasecmp(ag->command,"k",1)==0) {
+        //player continue receiving command if he did not die while fighting the monster//
+        if (processKillMonsterCommand(ag) == 1) return(1);
+
+        //player exit the game if he died while fighting the monster//
+        else return(0);
+    }
+
+    //checks if player have entered a valid movement command//
+    if (processMovement(ag)) return (1);
+
+    //checks if user have entered a 'get' command//
+    if (strncasecmp(ag->command,"get ",4)==0) {
+
+        //if player have not gotten the golden chalice, continue receiving command//
+        if (processGet(ag)) return(1);
+
+        //if player have gotten the golden chalice, exit the game//
+        else return(0);
+    }
+
+    //checks if user have entered a 'drop' command//
+    if (strncasecmp(ag->command,"drop ",5)==0) {
+        //call function to process the drop command//
+        processDrop(ag);
+        return(1);
+    }
+
+    //checks if user have entered a 'inventory' or 'i' command//
+    if (strcasecmp(ag->command,"inventory")==0 || strcasecmp(ag->command,"i")==0) {
+        //call function to print the inventory of the player//
+        printInventory(ag);
+        return(1);
+    }
+
+    //checks if user have entered a 'eat' or 'drink' or 'use' command//
+    if (strncasecmp(ag->command,"eat ",4)==0 || strncasecmp(ag->command,"drink ",6)==0 ||
+        strncasecmp(ag->command,"use ",4)==0 || strcasecmp(ag->command,"ef")==0 || strcasecmp(ag->command,"de")==0 || strcasecmp(ag->command,"um")==0)
+    {
+        //call function to process the healing command//
+        processHealing(ag);
+        return(1);
+    }
+
+    //checks if user have entered a 'status' or 'ss' command//
+    if (strcasecmp(ag->command,"help")==0 || strcasecmp(ag->command,"h")==0) {
+        //call function to print the help menu//
+        printHelp();
+        return(1);
+    }
+
+    //checks if user have entered a 'tips' or 't' command//
+    if (strcasecmp(ag->command,"tips")==0 || strcasecmp(ag->command,"t")==0) {
+        //call function to print the tips menu//
+        printTips(ag);
+        return(1);
+    }
+
+    //checks if user have entered a 'status' or 'ss' command//
+    if (strcasecmp(ag->command,"status")==0 || strcasecmp(ag->command,"ss")==0) {
+        //call function to print the status of the player//
+        printStatus(ag);
+        return(1);
+    }
+
+    //checks if user have entered a 'map' or 'm' command//
+    if (strcasecmp(ag->command,"map")==0 || strcasecmp(ag->command,"m")==0) {
+        //call function to print the map of the game//
+        processMap(ag);
+        return(1);
+    }
+
+    //checks if user have entered a unlock related command//
+    if (strcasecmp(ag->command,"unlock door")==0 || strcasecmp(ag->command,"ud")==0 || strcasecmp(ag->command,"unlock room")==0 || strcasecmp(ag->command,"ur")==0) {
+        //call function to process the unlock command//
+        processLockedDoor(ag);
+        return(1);
+    }
+
+    //prints out valid command if command doesnt meet all above conditions//
+    printf("Unknown command: %s     [help(h)-View all available commands]\n",ag->command);
+
+    //return 1 to continue receiving command//
+    return(1);
 }
