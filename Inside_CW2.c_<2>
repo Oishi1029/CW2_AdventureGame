@@ -1,0 +1,91 @@
+//this function process the command that relates to killing monsters//
+int processKillMonsterCommand(adventureGame *ag){
+
+    if (strcasecmp(ag->command,"killMonster")==0 || strcasecmp(ag->command,"kill monster")==0 || strcasecmp(ag->command,"km")==0 ) {
+        //check if the monster in the room is a monster
+        if (strcasecmp(ag->monsterArray[ag->room],"monster")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+
+        }
+        else {
+            printf("There is no Monster here.\n");
+            return(1);
+        }
+    }
+
+    if (strcasecmp(ag->command,"killZombie")==0 || strcasecmp(ag->command,"kill zombie")==0 || strcasecmp(ag->command,"kz")==0) {
+        //check if the monster in the room is a zombie
+        if (strcasecmp(ag->monsterArray[ag->room],"zombie")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+        }
+        else {
+            printf("There is no Zombie here.\n");
+            return(1);
+        }
+    }
+
+    if (strcasecmp(ag->command,"killWerewolf")==0 || strcasecmp(ag->command,"kill werewolf")==0 || strcasecmp(ag->command,"kw")==0) {
+        //check if the monster in the room is a werewolf
+        if (strcasecmp(ag->monsterArray[ag->room],"werewolf")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+        }
+        else {
+            printf("There is no Werewolf here.\n");
+            return(1);
+        }
+    }
+
+    if (strcasecmp(ag->command,"killDracula")==0 || strcasecmp(ag->command,"kill dracula")==0|| strcasecmp(ag->command,"kdrac")==0) {
+        //check if the monster in the room is a dracula
+        if (strcasecmp(ag->monsterArray[ag->room],"dracula")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+        }
+        else {
+            printf("There is no Dracula here.\n");
+            return(1);
+        }
+    }
+
+    if (strcasecmp(ag->command,"killBride of Dracula")==0 || strcasecmp(ag->command,"kill bride of dracula")==0 || strcasecmp(ag->command,"kbodrac")==0) {
+        //check if the monster in the room is a werewolf
+        if (strcasecmp(ag->monsterArray[ag->room],"bride of dracula")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+        }
+        else {
+            printf("There is no Bride of Dracula here.\n");
+            return(1);
+        }
+    }
+
+    if (strcasecmp(ag->command,"killLizard-man")==0 || strcasecmp(ag->command,"kill lizard-man")==0|| strcasecmp(ag->command,"klm")==0) {
+        //check if the monster in the room is a lizard
+        if (strcasecmp(ag->monsterArray[ag->room],"lizard-man")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+        }
+        else {
+            printf("There is no lizard-man here.\n");
+            return(1);
+        }
+    }
+
+    if (strcasecmp(ag->command,"killDragon")==0 || strcasecmp(ag->command,"kill dragon")==0|| strcasecmp(ag->command,"kdrag")==0) {
+        //check if the monster in the room is a dragon
+        if (strcasecmp(ag->monsterArray[ag->room],"dragon")==0){
+            if (processKillMonster(ag)) return(1); //if player still alive, continue receiving command
+            else return(0); //if player died, exit the game
+        }
+        else {
+            printf("There is no dragon here.\n");
+            return(1);
+        }
+    }
+    else{
+        printf("There is no such monster here.\n",ag->command);
+    }
+}
