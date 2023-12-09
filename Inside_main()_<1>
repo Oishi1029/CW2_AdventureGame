@@ -1,0 +1,112 @@
+adventureGame ag = {
+            //room//
+            .room = 0,
+            .bronzeKeyUnlockRoomNum = 10,
+            .copperKeyUnlockRoomNum = 13,
+            .room1="Spawn Room",
+            .room2="Cafeteria",
+            .room3="Zombie Outpost",
+            .room4="Healing Chamber",
+            .room5="Werewolf Outpost",
+            .room6="Swordfight Arena",
+            .room7="Dracula's Lair",
+            .room8="Bronze Key Enigma",
+            .room9="Elixir Alcove",
+            .room10="Lizard-man Treasure Chamber",
+            .room11="Castle of the Bride of Dracula",
+            .room12="Silver Spear Enigma",
+            .room13="The Chalice's End",
+            .roomLockedArray= {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+            .lockSymbolRoom10='*',
+            .lockSymbolRoom13='*',
+
+            //look//
+            .lookArray = {
+                    "You are in Spawn Room.\nYou find yourself in a dimly lit chamber adorned with ancient stone walls.\n\nMovement: [East(e) to Cafeteria | South(s) to Swordfight Arena]                \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Cafeteria.\nYou see long wooden tables stretch across the room, adorned with all manners of delicacies.\n\nMovement: [West(w) to Spawn Room | East(e) to Zombie Outpost]              \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Zombie Outpost.\nThe air is thick with an eerie silence, broken only by the distant moans of the undead.\n\nMovement: [West(w) to Cafeteria | East(e) to Healing Chamber | South(s) to Bronze Key Enigma]             \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Healing Chamber.\nAs you step into this serene chamber, you immediately sense a calming aura enveloping you.\n\nMovement: [West(w) to Zombie Outpost | East(e) to Werewolf Outpost | South(s) to Elixir Alcove]               \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Werewolf Outpost.\nYou notice the walls bear claw marks, and eerie howls echo in the distance.\n\nMovement: [West(w) to Healing Chamber | South(s) to Lizard-man Treasure Chamber]                \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Swordfight Arena.\nIn the heart of the arena, you spot a magnificent sword and a monster sleeping beside it.\n\nMovement: [North(n) to Spawn Room]                \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Dracula's Lair.\nYou see dracula himself stands as an imposing figure, guarding a copper key, a crucial artifact in your adventure.\n\nMovement: [South(s) to Room11 | East(e) to Bronze Key Enigma]              \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Bronze Key Enigma.\nIn the center of the room, gleams a majestic bronze key, bathed in an ethereal light.\n\nMovement: [West(w) to Dracula's Lair | North(n) to Zombie Outpost | East(e) to Elixir Alcove | South(s) to Silver Spear Enigma]              \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Elixir Alcove\nIn the center of the alcove, rests a crystal-clear vial containing an elixir.\n\nMovement: [North(n) to Healing Chamber | West(w) to Bronze Key Enigma]                \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Lizard-man Treasure Chamber.\nIn the heart of the chamber, atop a grand stone pedestal, lies a diamond cross, guarded by a lizard-man\n\nMovement: [North(n) to Werewolf Outpost]             \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Castle of the Bride of Dracula.\nIn the center of the room, you spot the Bride of Dracula herself. She is a vision of ethereal beauty, with raven-black hair cascading over her pale.\n\nMovement: [North(n) to Dracula's Lair | East(e) to Silver Spear Enigma]              \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in Silver Spear Enigma.\nAt the center of the chamber, mounted on a ornate pedestal, rests a Silver Spear.\n\nMovement: [West(w) to Castle of the Bride of Dracula | North(n) to Bronze Key Enigma | East(e) to The Chalice's End]               \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n",
+                    "You are in The Chalice's End.\nIn the heart of this wondrous chamber, you spot the ultimate artifact—the Golden Chalice, a formidable dragon aware of your presence.\n\nMovement: [West(w) to Silver Spear Enigma]               \nGuide   : [map(m) - View Map] [look(l) - Look Room]\n"
+            },
+
+
+            //move//
+            .moveArray = {{"You cannot go north from here   [look(l) - Look Room]",     "You go south to Swordfight Arena  [look(l) - Look Room]",              "You go east to Cafeteria   [look(l) - Look Room]",         "You cannot go west from here    [look(l) - Look Room]"},
+                          {"You cannot go north from here   [look(l) - Look Room]",     "You cannot go south from here  [look(l) - Look Room]",                 "You go east to Zombie Outpost  [look(l) - Look Room]",     "You go west to Spawn Room   [look(l) - Look Room]"},
+                          {"You cannot go north from here   [look(l) - Look Room]",     "You go south to Bronze Key Enigma  [look(l) - Look Room]",             "You go east to Healing Chamber   [look(l) - Look Room]",   "You go west to Cafeteria    [look(l) - Look Room]"},
+                          {"You cannot go north from here   [look(l) - Look Room]",     "You go south to Elixir Alcove  [look(l) - Look Room]",                 "You go east to Werewolf Outpost  [look(l) - Look Room]",   "You go west to Zombie Outpost   [look(l) - Look Room]"},
+                          {"You cannot go north from here   [look(l) - Look Room]",     "You go south to Lizard-man Treasure Chamber [look(l) - Look Room]",    "You cannot go east from here   [look(l) - Look Room]",     "You go west to Healing Chamber    [look(l) - Look Room]"},
+                          {"You go north to Spawn Room   [look(l) - Look Room]",        "You cannot go south from here  [look(l) - Look Room]",                 "You cannot go east from here   [look(l) - Look Room]",     "You cannot go west from here    [look(l) - Look Room]"},
+                          {"You cannot go north from here   [look(l) - Look Room]",     "You go south to Castle of the Bride of Dracula [look(l) - Look Room]", "You go east to Bronze Key Enigma [look(l) - Look Room]",   "You cannot go west from here  [look(l) - Look Room]"},
+                          {"You go north to Zombie Outpost   [look(l) - Look Room]",    "You go south to Silver Spear Enigma [look(l) - Look Room]",            "You go east to Elixir Alcove   [look(l) - Look Room]",     "You go west to Dracula's Lair    [look(l) - Look Room]"},
+                          {"You go north to Healing Chamber   [look(l) - Look Room]",   "You cannot go south from here  [look(l) - Look Room]",                 "You cannot go east from here  [look(l) - Look Room]",      "You go west to Bronze Key Enigma   [look(l) - Look Room]"},
+                          {"You go north to Werewolf Outpost   [look(l) - Look Room]",  "You cannot go south from here  [look(l) - Look Room]",                 "You cannot go east from here   [look(l) - Look Room]",     "You cannot go west from here    [look(l) - Look Room]"},
+                          {"You go north to Dracula's Lair   [look(l) - Look Room]",    "You cannot go south from here  [look(l) - Look Room]",                 "You go east to Silver Spear Enigma [look(l) - Look Room]", "You cannot go west from here  [look(l) - Look Room]"},
+                          {"You go north to Bronze Key Enigma   [look(l) - Look Room]", "You cannot go south from here  [look(l) - Look Room]",                 "You go east to The Chalice's End [look(l) - Look Room]",   "You go west to Castle of the Bride of Dracula [look(l) - Look Room]"},
+                          {"You cannot go north from here   [look(l) - Look Room]",     "You cannot go south from here  [look(l) - Look Room]",                 "You cannot go east from here   [look(l) - Look Room]",     "You go west to Silver Spear Enigma   [look(l) - Look Room]"}},
+
+            .moveToArray = {{-1, 5,  1,  -1},
+                            {-1, -1, 2,  0},
+                            {-1, 7,  3,  1},
+                            {-1, 8,  4,  2},
+                            {-1, 9,  -1, 3},
+                            {0,  -1, -1, -1},
+                            {-1, 10, 7,  -1},
+                            {2,  11, 8,  6},
+                            {3,  -1, -1, 7},
+                            {4,  -1, -1, -1},
+                            {6,  -1, 11, -1},
+                            {7,  -1, 12, 10},
+                            {-1, -1, -1, 11}},
+
+            //move//
+            .direction = {"north", "south", "east", "west"},
+            .dir = {"n", "s", "e", "w"},
+
+
+            //monster//
+            .monsterArray = {"entity", "entity", "Zombie", "entity", "Werewolf", "Monster", "Dracula", "entity",
+                             "entity", "Lizard-man", "Bride of Dracula", "entity", "Dragon"},
+            .monsterShortFormKillCommandArray= {"", "", "kz", "", "kw", "km", "kdrac", "", "", "klm", "kbodrac", "",
+                                                "kdrag"},
+            .monsterStatusArray={-1, -1, 1, -1, 1, 1, 1, -1, -1, 1, 1, -1, 1},
+            .monsterHealthArray={-1, -1, 5, -1, 12, 4, 12, -1, -1, 5, 7, -1, 12},
+            .monsterDamageArray = {0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 2},
+            .monsterPreventionArray= {0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1},
+            .killMonsterXPArray = {0, 0, 3, 0, 6, 3, 6, 0, 0, 3, 3, 0, 6},
+
+            //artifacts//
+            .N_artifact = 9,
+            .artifact = {"Food", "Medpack", "Sword", "Copper Key", "Bronze Key", "Elixir", "Diamond Cross",
+                         "Silver Spear", "Golden Chalice"},
+            .artifactHealingArray = {"Food", "Medpack", "", "", "", "Elixir", "", "", ""},
+            .artifactHealingEffectArray = {5, 10, 0, 0, 0, 10, 0, 0, 0},
+            .artifactLoc = {1, 3, 5, 6, 7, 8, 9, 11, 12},
+            .swordDamageArray = {0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1},
+            .diamondCrossDamageArray = {0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0},
+            .silverSpearDamageArray = {0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+            .artifactDamageArray = {"", "", "Sword", "", "", "", "Diamond Cross", "Silver Spear", ""},
+            .numArtifactsObtainedArray={0, 0, 0, 0, 0, 0, 0, 0, 0},
+            .artifactXPOnceFlag={1, 1, 1, 1, 1, 1, 1, 1, 1},
+            .getArtifactXPArray = {2, 4, 5, 12, 8, 4, 10, 5, 20},
+
+            //plauer status//
+            .maxPlayerHealth=20,
+            .playerHealth = 12,
+            .playerXP = 0,
+            .playerDamageArray = {0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1},
+            .maxPlayerXP = 100,
+
+
+            //inventory//
+            .numItem=0,
+            .maxNumItem =3,
+    };
