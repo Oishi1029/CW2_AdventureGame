@@ -1,0 +1,126 @@
+//this function process the command that relates to getting artifacts//
+int processGet(adventureGame *ag){
+    printf("<Get Item>\n");
+
+    //store the name of item entered by user//
+    char *item = &ag->command[4];
+
+    //iterates over the total number of artifact//
+    for (int i=0;i<ag->N_artifact;i++) {
+
+        //checks if the item entered by user is in the artifact list//
+        if (strcasecmp(item, ag->artifact[i]) == 0) {
+
+            //checks three condition://
+            // 1) artifact is in the room the player wants to get,
+            // 2) player have not reach the max no. of item,
+            // 3) monster is not preventing the player from getting the item
+            if (ag->artifactLoc[i] == ag->room && ag->numItem < (ag->maxNumItem) && ag->monsterPreventionArray[ag->room] == 0) {
+                printf("You pick up the %s. [inventory(i)-Check Inventory]\n", ag->artifact[i]);
+
+                //prints out the effect of the artifact//
+                printArtifactEffect(ag, &i);
+
+                // Change the location of the artifact to -1 (inventory).//
+                ag->artifactLoc[i] = -1;
+
+                //add the damage amplify effect to the player damage array when getting artifacts of damage type//
+                addDamage(ag,&i);
+
+                //ensure player can only XP once for each distinct artifact if it is drop and get repeatedly//
+                if (ag->artifactXPOnceFlag[i] ==1) {
+                    printf("\n");
+                    printf("<Player Status>\n");
+
+                    //tells user that he have gain XP//
+                    printf("You gain %d XP!\n",ag->getArtifactXPArray[i]);
+
+                    //adds the XP to the player XP//
+                    ag->playerXP += ag->getArtifactXPArray[i];
+
+                    //declare the artifactXPOnceFlag to 0 to indicate that the player have gotten the artifact to indicate XP gain is invalid the next time user pick the item again//
+                    ag->artifactXPOnceFlag[i] =0;
+                }
+
+                //increase the number of item in the inventory by one after getting the item//
+                ag->numItem++;
+
+                //set the artifacts array of ith element to 1 to indicate that the player have gotten the artifact//
+                ag->numArtifactsObtainedArray[i] = 1;
+
+                //checks if the player have gotten the golden chalice//
+                if (ag->artifactLoc[8] == -1) {
+
+                    //prints out congratulatory message//
+                    printf("\"Congratulations, %s! With the golden chalice in your grasp, you have emerged victorious in this epic adventure game !!!\n",ag->name);
+                    printf("\n");
+                    printf(" .:--::---:--. \n");
+                    printf(" :---::...::-: \n");
+                    printf(" .--==-::--::. \n");
+                    printf("  .:-==-=--:.  \n");
+                    printf("     .-*-.     \n");
+                    printf("       +       \n");
+                    printf("      .+       \n");
+                    printf("     .:+.      \n");
+                    printf("  .-===+---:.  \n");
+                    printf("   :--===::.   \n");
+                    printf("\n");
+
+                    //return player to room1(spawn room)//
+                    ag->room = 0;
+
+                    //tells user he have been returned to the starting room//
+                    printf("You have been returned to the starting room.\n");
+
+                    printf("\n");
+
+                    //prints out the score of the player//
+                    printScore(ag);
+
+                    //display a thank you message to user for playing the game//
+                    printf("\n");
+                    printf("Thank you for playing this adventure game, %s ! Hope you are having fun !\n",ag->name);
+
+                    printf("Adventure Game Terminated. All player's data have been reset to default\n");
+
+                    //exit the game by returning 0//
+                    return(0);
+                }
+                return (1);
+            }
+
+            //checks three condition://
+            // 1) artifact is in the room the player wants to get
+            // 2) player have reach the max no. of item
+            // 3) monster is not preventing the player from getting the item
+            if (ag->artifactLoc[i] == ag->room && ag->numItem >= ag->maxNumItem && ag->monsterPreventionArray[ag->room] == 0) {
+
+                //tells user that he have reach the max no. of item//
+                printf("You can carry maximum of 3 items only. %s is not picked up. [inventory(i)-Check Inventory]\n",ag->artifact[i]);
+                return (1);
+            }
+
+            //checks two condition://
+            // 1) artifact is in the room the player wants to get
+            // 2) monster is preventing the player from getting the item
+            if (ag->artifactLoc[i] == ag->room && ag->monsterPreventionArray[ag->room] == 1) { //checks if the item is in the room the player is in
+
+                //tells user that he cannot get the item because the monster is preventing him from getting the item//
+                printf("%s prevents you from picking up %s !\n", ag->monsterArray[ag->room], ag->artifact[i]);
+
+                //tells user to kill the monster first before getting the item//
+                printf("Kill the %s first ! [Enter 'kill%s(%s)' to enter combat]\n", ag->monsterArray[ag->room],ag->monsterArray[ag->room],ag->monsterShortFormKillCommandArray[ag->room]);
+                return (1);
+            }
+
+            else {
+                //tells user that the artifacts he wants to get is not in the room//
+                printf("There is no %s here.    [look(l)-Look Room]\n", ag->artifact[i]);
+                return (1);
+            }
+        }
+    }
+    //tells user that the item he wants to get is not in the room//
+    printf("There is no %s here.    [look(l)-Look Room]\n", item);
+    return(1);
+}
