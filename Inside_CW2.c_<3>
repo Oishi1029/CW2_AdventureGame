@@ -1,0 +1,101 @@
+int processKillMonster(adventureGame *ag){
+    if (ag->monsterStatusArray[ag->room]>0) {
+
+        //prints out the command log//
+        printf("<Combat Log>\n");
+        printf("You did %d damage to %s!\n",ag->playerDamageArray[ag->room], ag->monsterArray[ag->room]);
+
+        //minus monster health by the respective player damage in the room//
+        ag->monsterHealthArray[ag->room]-=ag->playerDamageArray[ag->room];
+
+        //display message that monster did damage to player//
+        printf("%s did %d damage to you!\n",ag->monsterArray[ag->room],ag->monsterDamageArray[ag->room]);
+
+        //minus players health by the respective monster damage in the room//
+        ag->playerHealth-=ag->monsterDamageArray[ag->room];
+
+        printf("\n");
+
+        //checks if the monster health is less than 0, if yes, set the monster health to 0//
+        if (ag->monsterHealthArray[ag->room]<0) ag->monsterHealthArray[ag->room]=0;
+
+        //checks if the player health is less than 0, if yes, set the player health to 0//
+        if (ag->playerHealth<0) ag->playerHealth=0;
+
+        //prints out the combat status//
+        printf("<Combat Status>\n");
+        printf("%s: %d HP | %s: %d HP\n",ag->name,ag->playerHealth,ag->monsterArray[ag->room],ag->monsterHealthArray[ag->room]);
+        printf("\n");
+
+
+        //checks if player is dead//
+        if (ag->playerHealth==0) {
+
+            printf("=====================================================Game Over=======================================================\n");
+            printf("You died. You have lost the game\n");
+
+            //prints out the score of the player//
+            printScore(ag);
+
+            //exit the game by returning 0//
+            return(0);
+        }
+
+        //checks if monster is dead//
+        if (ag->monsterHealthArray[ag->room]==0) {
+
+            //prints out the combat result//
+            printf("<Combat Result>\n");
+            printf("Congratulations, you've slay the vile %s!\n",ag->monsterArray[ag->room]);
+
+            // Change the status of the monster to "dead".//
+            ag->monsterStatusArray[ag->room]=0;
+
+            //set prevention array to 0 indicates monster cannot prevents you from getting the artifact in that room//
+            ag->monsterPreventionArray[ag->room]=0;
+
+            //tells user that he have gain XP//
+            printf("\n");
+            printf("<Player Status>\n");
+            printf("You gain %d XP!\n",ag->killMonsterXPArray[ag->room]);
+
+            //adds the XP to the player XP//
+            ag->playerXP += ag->killMonsterXPArray[ag->room];
+        }
+
+        //checks if the player is low on health//
+        if (ag->playerHealth>0 && ag->playerHealth<=3){
+            //tells user that he is low on health//
+            printf("\n");
+            printf("!!!!!!!!!!!!Player Status Warning!!!!!!!!!!!!!!\n");
+            printf("%s, you are low on health ! (%d HP)\n",ag->name, ag->playerHealth);
+
+            //iterates over the total number of artifact//
+            for (int i=0;i<ag->N_artifact;i++){
+
+                //checks if user have the healing artifact in his inventory
+                if (ag->artifactLoc[i]==-1 && strcmp(ag->artifact[i],ag->artifactHealingArray[i])==0){
+                    printf("You have %s in your inventory. Enter 'eat %s' to consume it to increase your HP by %d\n",ag->artifact[i],ag->artifact[i],ag->artifactHealingEffectArray[i]);
+                    return(1);
+                }
+
+                // checks if user does not have healing artifacts in his inventory
+                if (ag->artifactLoc[i]==-1 || strcmp(ag->artifact[i],ag->artifactHealingArray[i])!=0){
+                    printf("You have no healing artifacts in your inventory ! You are unable to restore HP. [tips(t) - View Artifacts Effect]\n");
+                    return(1);
+                }
+            }
+        }
+        return(1);
+    }
+
+    else if (ag->monsterStatusArray[ag->room]==0) {
+        printf("The %s is already dead!\n",ag->monsterArray[ag->room]);
+        return(1);
+    }
+
+    else if (ag->monsterStatusArray[ag->room]==-1) {
+        printf("There is no %s here.\n",ag->monsterArray[ag->room]);
+        return(1);
+    }
+}
