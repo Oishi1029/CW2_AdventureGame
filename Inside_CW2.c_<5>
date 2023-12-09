@@ -1,0 +1,49 @@
+//this function process the command that relates to movement//
+int processMovement(adventureGame *ag){
+
+    //checks the direction command entered with all the four possible direction//
+    for (int i=0; i<=3;i++){
+
+        //checks if the direction command entered is valid//
+        if (strcasecmp(ag->command,ag->direction[i])==0 || strcasecmp(ag->command,ag->dir[i])==0){
+
+            //checks if the door is locked and the user is able to move to that room//
+            if (ag->roomLockedArray[ag->moveToArray[ag->room][i]]==1 && ag->moveToArray[ag->room][i]!=-1){
+                printf("<Path blocked>\n");
+
+                //checks if the door to room10 is locked//
+                if (ag->moveToArray[ag->room][i]+1==10) printf("The door to %s is locked. \n",ag->room10);
+
+                //tells user that he have the key to unlock room 10//
+                if (ag->artifactLoc[4]==-1 && ag->moveToArray[ag->room][i]+1==ag->bronzeKeyUnlockRoomNum) {
+                    printf("You have a bronze key to unlock it by entering 'unlock door'\n");
+                }
+
+                //tells user that he do not have the key to unlock room 10//
+                if (ag->artifactLoc[4]!=-1 && ag->moveToArray[ag->room][i]+1==ag->bronzeKeyUnlockRoomNum) {
+                    printf("You dont have the key to unlock door to %s. \nTry getting %s at %s.\n",ag->room10,ag->artifact[4],ag->room8);
+                }
+
+                //checks if the door to room13 is locked//
+                if (ag->moveToArray[ag->room][i]+1==13) printf("The door to %s is locked. \n",ag->room13);
+
+                //tells user that he have the key to unlock room 13//
+                if (ag->artifactLoc[3]==-1 && ag->moveToArray[ag->room][i]+1==ag->copperKeyUnlockRoomNum) printf("You have a copper key to unlock it by entering 'unlock door'\n");
+
+                //tells user that he do not have the key to unlock room 13//
+                if (ag->artifactLoc[3]!=-1 && ag->moveToArray[ag->room][i]+1==ag->copperKeyUnlockRoomNum) printf("You dont have the key to unlock door to %s. \nTry getting %s at %s.\n",ag->room13,ag->artifact[3],ag->room7);
+            }
+
+            //door is not locked and the user is able to move to that room//
+            else{
+                //display the move description user have entered
+                printf("%s\n",ag->moveArray[ag->room][i]);
+
+                //user move to the room if the direction command is valid for that room//
+                if (ag->moveToArray[ag->room][i]!=-1) ag->room=ag->moveToArray[ag->room][i];
+            }
+            return(1);
+        }
+    }
+    return(0);
+}
