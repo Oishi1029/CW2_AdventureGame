@@ -1,0 +1,34 @@
+//this function the look command from the user//
+void processLook(adventureGame *ag){
+
+    printf("==========================================================================Current Room==================================================================================\n");
+
+    //prints out the current room desription
+    printf("%s\n",ag->lookArray[ag->room]);
+
+    //tells user if there is a monster in the room//
+    if (ag->monsterStatusArray[ag->room]>0) {
+        printf("There is a %s here. Enter 'kill%s(%s)' to enter combat.\n",ag->monsterArray[ag->room],ag->monsterArray[ag->room],ag->monsterShortFormKillCommandArray[ag->room]);
+    }
+
+    //tells user if there is a dead monster in the room//
+    else if (ag->monsterStatusArray[ag->room]==0) printf("There is a dead %s here.\n",ag->monsterArray[ag->room]);
+
+    //tells user if there is no monster in the room//
+    else if (ag->monsterStatusArray[ag->room]==-1) printf("There is no %s here.\n",ag->monsterArray[ag->room]);
+
+    //tells user if there is monster preventing him from getting the artifacts in the room//
+    for (int i=0;i<ag->N_artifact;i++){
+
+        //tells user that he can get artifacts in the room if there is no monster preventing him from getting the artifacts//
+        if (ag->artifactLoc[i]==ag->room && ag->monsterPreventionArray[ag->room]==0) {
+            printf("There is a %s here. Enter 'get %s' to obtain it.\n",ag->artifact[i], ag->artifact[i]);
+        }
+
+        //tells user that he cannot get artifacts in the room if there is a monster preventing him from getting the artifacts//
+        else if (ag->artifactLoc[i]==ag->room && ag->monsterPreventionArray[ag->room]==1) {
+            printf("There is a %s here. Kill the %s first to obtain it.\n",ag->artifact[i],ag->monsterArray[ag->room]);
+        }
+    }
+    printf("========================================================================================================================================================================\n");
+}
