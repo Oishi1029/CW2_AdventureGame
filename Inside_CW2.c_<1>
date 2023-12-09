@@ -1,0 +1,19 @@
+//this function replace the new line character with end of string character of the command received from the user//
+void replaceNewLine(adventureGame *ag){
+
+    //iterates over every element of the command array to replace the new line character with EOS
+    for (int i=0;ag->command[i]!='\0';i++){
+        if (ag->command[i]=='\n') {
+            ag->command[i]='\0';
+            //return;
+        }
+    }
+
+    //iterates over every element of the lastCommand array to replace the new line character with EOS
+    for (int i=0;ag->lastCommand[i]!='\0';i++){
+        if (ag->lastCommand[i]=='\n') {
+            ag->lastCommand[i]='\0';
+            //return;
+        }
+    }
+}
