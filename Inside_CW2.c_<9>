@@ -1,0 +1,34 @@
+//this function adds the damage amplify effect of the respective player damage array when getting artifacts of damage type//
+int addDamage(adventureGame *ag, int *i){
+    //checks if the artifact is a damage item
+    if (strcmp(ag->artifact[*i],ag->artifactDamageArray[*i])==0){
+
+        //checks if the artifact is a sword
+        if (strcmp(ag->artifact[*i],"Sword")==0){
+
+            //iterate over every room to add the sword damage to the player damage array
+            for (int j=0;j<13;j++){
+                ag->playerDamageArray[j]+=ag->swordDamageArray[j];
+            }
+        }
+
+        //checks if the artifact is a diamond cross
+        else if (strcmp(ag->artifact[*i],"Diamond Cross")==0){
+
+            //iterate over every room to add the diamond cross damage to the player damage array
+            for (int j=0;j<13;j++){
+                ag->playerDamageArray[j]+=ag->diamondCrossDamageArray[j];
+            }
+        }
+
+        //checks if the artifact is a silver spear
+        else if (strcmp(ag->artifact[*i],"Silver Spear")==0){
+
+            //iterate over every room to add the silver spear damage to the player damage array
+            for (int j=0;j<13;j++){
+                ag->playerDamageArray[j]+=ag->silverSpearDamageArray[j];
+            }
+        }
+    }
+    return(1);
+}
