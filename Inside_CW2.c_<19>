@@ -1,0 +1,17 @@
+//this function prints out the monsters killed by the player at the end of the game//
+void displayMonsterKilled(adventureGame *ag){
+    int j=0;
+    printf("\n");
+    printf("<Monster Killed>\n");
+
+    //prints the name of every monsters killed by the player from start of program till this point
+    for (int i=0;i<13;i++){
+        if (ag->monsterStatusArray[i]==0){
+            printf("%d: %s \n",j+1,ag->monsterArray[i]);
+            j++;
+        }
+    }
+
+    //prints "nothing" if the player have not killed any monster throughout the game//
+    if (j==0) printf("Nothing\n");
+}
