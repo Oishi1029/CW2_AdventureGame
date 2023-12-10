@@ -1,0 +1,26 @@
+//this function prints out the adventure map//
+void processMap(adventureGame *ag){
+    printf("<Map>\n");
+    printf("\n");
+
+    //update the map if the path to room10 is unlocked//
+    if (ag->roomLockedArray[9]==0) ag->lockSymbolRoom10 = '|';
+
+    //update the map if the path to room10 is locked//
+    else if (ag->roomLockedArray[9]==1) ag->lockSymbolRoom10 = 'X';
+
+    //update the map if the path to room13 is unlocked//
+    if (ag->roomLockedArray[12]==0) ag->lockSymbolRoom13 = '-';
+
+    //update the map if the path to room13 is locked//
+    else if (ag->roomLockedArray[12]==1) ag->lockSymbolRoom13 = 'X';
+
+    printf("[%s]-------------------[%s]------------------[%s]-----------------[%s]-----------------[%s]                                                                          \n",ag->room1,ag->room2,ag->room3,ag->room4,ag->room5);
+    printf("      |                                                             |                             |                                     |                            \n");
+    printf("      |                                                             |                             |                                     %c                           \n",ag->lockSymbolRoom10);
+    printf("      |                                                             |                             |                                     |                            \n");
+    printf("[%s]            [%s]--------------[%s]---------------[%s]               [%s]                                                                                         \n",ag->room6,ag->room7,ag->room8,ag->room9, ag->room10);
+    printf("                                     |                              |                                                                                                \n");
+    printf("                                     |                              |                                                                                                \n");
+    printf("                      [%s]------[%s]----------%c---------[%s]                                                                                                        \n",ag->room11,ag->room12,ag->lockSymbolRoom13,ag->room13);
+}
