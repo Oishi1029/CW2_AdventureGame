@@ -1,0 +1,32 @@
+//this function prints out the effect of the artifacts//
+void printArtifactEffect(adventureGame *ag, int *i){
+    //checks if the artifact obtained is a healing item, if yes, let user know that he can use it to increase his HP by a number//
+    if (strcasecmp(ag->artifact[*i],"Food")==0){
+        printf("Enter 'eat food' to consume it to increase your HP by %d\n",ag->artifactHealingEffectArray[*i]);
+    }
+    if (strcasecmp(ag->artifact[*i],"Elixir")==0){
+        printf("Enter 'drink elixir' to consume it to increase your HP by %d\n",ag->artifactHealingEffectArray[*i]);
+    }
+    if (strcasecmp(ag->artifact[*i],"Medpack")==0){
+        printf("Enter 'use medpack' to consume it to increase your HP by %d\n",ag->artifactHealingEffectArray[*i]);
+    }
+
+    //checks if the artifact obtained is a damage item, if yes, let user know that he can use it to increase his damage to the respective monster by a number//
+    if (strcasecmp(ag->artifact[*i],"Sword")==0){
+        printf("You now have increased damage to every entities by 1\n");
+    }
+    if (strcasecmp(ag->artifact[*i],"Diamond Cross")==0){
+        printf("You now have increased damage to Dracula and Bride of Dracula by 3\n");
+    }
+    if (strcasecmp(ag->artifact[*i],"Silver Spear")==0){
+        printf("You now have increased damage to Werewolf by 3\n");
+    }
+
+    //checks if the artifact is a key, if yes, let user know that he can use it to unlock th respective door
+    if (strcasecmp(ag->artifact[*i],"Bronze Key")==0){
+        printf("You are now able to unlock the door to %s\n",ag->room10);
+    }
+    if (strcasecmp(ag->artifact[*i],"Copper Key")==0){
+        printf("You are now able to unlock the door to %s\n",ag->room13);
+    }
+}
