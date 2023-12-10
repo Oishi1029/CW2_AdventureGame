@@ -1,0 +1,21 @@
+//this function prints out the information of the artifacts//
+void printTips(adventureGame *ag){
+    printf("===============================================Tips===================================================\n");
+    printf("<Weapon ATK Damage Buff");
+    printf(">\n");
+    printf("Sword         : +%d damage to every entities\n",ag->swordDamageArray[2]);
+    printf("Diamond Cross : +%d damage to Dracula\n",ag->diamondCrossDamageArray[6]);
+    printf("Silver Spear  : +%d damage to Werewolf\n",ag->silverSpearDamageArray[4]);
+    printf("\n");
+    printf("<Healing Effect");
+    printf(">\n");
+    printf("Food    : +%d HP\n",ag->artifactHealingEffectArray[0]);
+    printf("Elixir  : +%d HP\n",ag->artifactHealingEffectArray[5]);
+    printf("Medpack : +%d HP\n",ag->artifactHealingEffectArray[1]);
+    printf("\n");
+    printf("<Key Unlock");
+    printf(">\n");
+    printf("Bronze Key : Unlock door to %s\n",ag->room10);
+    printf("Copper Key : Unlock door to %s\n",ag->room13);
+    printf("=====================================================================================================\n");
+}
