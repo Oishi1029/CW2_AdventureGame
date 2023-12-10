@@ -1,0 +1,58 @@
+//this function process unlock command received from user//
+int processLockedDoor(adventureGame *ag){
+    printf("<Unlock Door>\n");
+
+    //checks if the room the user can move to the locked room10 and if the user's inventory contains bronze key
+    if (ag->room==4 && ag->artifactLoc[4]==-1){
+
+        printf("You unlock the door to %s with the %s. [look(l) - Look Room]\n",ag->room10,ag->artifact[4]);
+        printf("Your adventure map is updated ! [map(m)-View Map]\n");
+
+        //update the lock status of the room to be unlocked//
+        ag->roomLockedArray[9]=0;
+
+        //user goes to the unlocked room
+        ag->room=9;
+
+        return(1);
+    }
+
+    if (ag->room==4 && ag->artifactLoc[4]!=-1){
+
+        //tells user that he do not have the key to unlock the room//
+        printf("You dont have the key to unlock door to %s. Try getting %s at %s. [map(m)-View Map]\n",ag->room10,ag->artifact[4],ag->room8);
+
+        return(1);
+    }
+
+
+    //checks if the room the user stays is adjacent to the locked room11 and if the user's inventory contains copper key
+    if (ag->room==11 && ag->artifactLoc[3]==-1){
+
+        printf("You unlock the door to %s with the %s. [look(l) - Look Room]\n",ag->room13,ag->artifact[3]);
+        printf("Your adventure map is updated ! [map(m)-View Map]\n");
+
+        //update the lock status of the room to be unlocked//
+        ag->roomLockedArray[12]=0;
+
+        //user goes to the unlocked room
+        ag->room=12;
+
+        return(1);
+    }
+
+    if (ag->room==11 && ag->artifactLoc[3]!=-1){
+
+        //tells user that he do not have the key to unlock the room//
+        printf("You dont have the key to unlock door to %s. Try getting %s at %s. [map(m)-View Map]\n",ag->room13,ag->artifact[3],ag->room7);
+        return(1);
+    }
+
+    else{
+
+        //tells user that there are no locked door around him//
+        printf("There are no locked door around you. Nothing is unlocked. [map(m)-View Map]\n");
+
+        return(1);
+    }
+}
