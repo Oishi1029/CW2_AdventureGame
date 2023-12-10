@@ -1,0 +1,36 @@
+//this function prints out XP progress bar of the player at the end of the game//
+void displayProgressBar(adventureGame *ag){
+
+    // Calculate the progress as float//
+    float progress = (float) (ag->playerXP) / (float) (ag->maxPlayerXP);
+
+    printf("\n");
+    printf("<Score Progress>\n");
+    printf("XP obtained: [");
+
+    // Defined a max number of slots to print//
+    int numSlots = 100;
+
+    // Calculate the number of filled slots//
+    int filledSlots = progress * numSlots;
+
+    // Fill the slots based on the progress//
+    for (int i = 0; i < numSlots; i++) {
+        if (i < filledSlots) {
+            printf("*");  // Filled slot
+        } else {
+            printf(".");  // Empty slot
+        }
+    }
+
+    // Print the percentage progress at the end of the progress bar//
+    printf("] %.0f%%\n", progress * 100);
+
+    if (progress==1){
+        printf("BRAVO, adventurer!!! You've explored every tiny bit of this adventure game!\n");
+    }
+
+    if (progress<1){
+        printf("You have not explored every tiny bit of this adventure game. Try challenge it again next time!\n");
+    }
+}
