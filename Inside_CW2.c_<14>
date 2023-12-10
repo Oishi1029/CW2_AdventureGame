@@ -1,0 +1,12 @@
+//this function prints out the player's score at the end of the game//
+void printScore(adventureGame *ag){
+
+    //prints out the player's XP progress//
+    displayProgressBar(ag);
+
+    //prints out the list of monster killed//
+    displayMonsterKilled(ag);
+
+    //prints out the list of artifacts obtained//
+    displayArtifactObtained(ag);
+}
