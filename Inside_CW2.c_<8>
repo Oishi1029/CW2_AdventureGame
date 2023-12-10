@@ -1,0 +1,65 @@
+//this function process the command that relates healing HP//
+int processHealing(adventureGame *ag){
+    printf("<Restore HP>\n");
+    int i=0;
+
+    //iterates over every element of the command array to find the index of the first space character//
+    for (i=0;ag->command[i]!='\0';i++){
+        if (ag->command[i]==' ') break;
+    }
+
+    //store the name of item entered by user//
+    char *item = &ag->command[i+1];
+
+    //iterates over the total number of artifact//
+    for (int k=0;k<ag->N_artifact;k++){
+
+        //checks if the item is in the artifact list//
+        if (strcasecmp(item,ag->artifact[k])==0){
+
+            //checks two condition://
+            // 1) artifact is in the inventory
+            // 2) artifact is of healing type
+            if (ag->artifactLoc[k]==-1 && strcmp(ag->artifact[k],ag->artifactHealingArray[k])==0){
+                //prints out the effect of the artifact//
+                printf("%s heals you for %d\n",ag->artifactHealingArray[k], ag->artifactHealingEffectArray[k]);
+
+                //adds the healing effect to the player health//
+                ag->playerHealth+=ag->artifactHealingEffectArray[k];
+
+                //if player exceed the max player health, set the player health to the max player health//
+                if (ag->playerHealth>ag->maxPlayerHealth) ag->playerHealth=ag->maxPlayerHealth;
+
+                //prints out the current HP of player
+                printf("You have %d/%d HP now.              [status(ss)-Check Player Status]\n",ag->playerHealth,ag->maxPlayerHealth);
+
+                //delete the artifacts from the game after using it
+                ag->artifactLoc[k]=-2;
+
+                //decrease the number of item in the inventory by one after using the item//
+                ag->numItem--;
+                return(1);
+            }
+
+            //checks two condition://
+            // 1) artifact is in the inventory
+            // 2) artifact is not of healing type
+            else if (ag->artifactLoc[k]==-1 && strcmp(ag->artifact[k],ag->artifactHealingArray[k])!=0){
+
+                //tells user that the item he wants to use is not of healing type//
+                printf("You cannot use %s to restore HP. [tips(t)-View Artifacts Effect]\n",ag->artifact[k]);
+                return(1);
+            }
+
+            else {
+
+                //print message to inform user that the item is not available to be used
+                printf("\'%s\' is not available in the inventory.               [inventory(i)-Check Inventory]\n",item);
+                return(1);
+            }
+        }
+    }
+    //tells user that the item he wants to use is not in the game//
+    printf("Invalid Item: %s                 [inventory(i)-Check inventory]\n",item);
+    return(1);
+}
