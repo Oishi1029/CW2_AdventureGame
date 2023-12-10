@@ -1,0 +1,17 @@
+//this function prints out the artifacts obtained by the player at the end of the game//
+void displayArtifactObtained(adventureGame *ag){
+    int k=0;
+    printf("\n");
+    printf("<Artifacts Obtained>\n");
+
+    //print the name of every artifacts obtained from start of program till this point
+    for (int i=0;i<ag->N_artifact;i++){
+        if (ag->numArtifactsObtainedArray[i]==1){
+            printf("%d: %s \n",k+1,ag->artifact[i]);
+            k++;
+        }
+    }
+
+    //prints "nothing" if the player have not obtained any artifact throughout the game//
+    if (k==0) printf("Nothing\n");
+}
