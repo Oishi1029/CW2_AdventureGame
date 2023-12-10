@@ -1,0 +1,17 @@
+//this function prints out the player's status of the game//
+void printStatus(adventureGame *ag){
+    printf("===============================================Player Status=================================================\n");
+
+    //prints out the player's HP//
+    printf("HP: %d/%d\n",ag->playerHealth,ag->maxPlayerHealth);
+
+    //prints out the player's XP//
+    printf("XP: %d/%d\n",ag->playerXP,ag->maxPlayerXP);
+
+    printf("===============================================Damage Status=================================================\n");
+
+    //prints out the damage of the player to every entities//
+    for (int i=0;i<13;i++){
+        if (ag->playerDamageArray[i]>0) printf("ATK Damage to %s: %d HP\n",ag->monsterArray[i],ag->playerDamageArray[i]);
+    }
+}
