@@ -1,0 +1,38 @@
+//this function prints out the command that relates to dropping artifacts//
+int processDrop(adventureGame *ag){
+    printf("<Drop Item>\n");
+
+    //store the name of item entered by user//
+    char *item = &ag->command[5];
+
+    //iterates over the total number of artifact//
+    for (int i=0;i<ag->N_artifact;i++){
+
+        //checks if the item entered by user is in the artifact list//
+        if (strcasecmp(item,ag->artifact[i])==0){
+
+            //checks if the item is in the inventory//
+            if (ag->artifactLoc[i]==-1){
+                printf("You drop the %s.            [inventory(i)-Check Inventory]\n",ag->artifact[i]);
+
+                // Change the location of the artifact to the current room after dropping//
+                ag->artifactLoc[i]=ag->room;
+
+                //remove the damage amplify effect in the player damage array when dropping artifacts of damage type//
+                minusDamage(ag, &i);
+
+                //decrease the number of item in the inventory by one after dropping the item//
+                ag->numItem--;
+                return(1);
+            }
+            else {
+                //tells user that the artifact he wants to drop is not in the inventory//
+                printf("You are not carrying %s.            [inventory(i)-Check Inventory]\n",ag->artifact[i]);
+                return(1);
+            }
+        }
+    }
+    //tells user that the item he wants to drop is not in the inventory//
+    printf("You are not carrying %s.                [inventory(i)-Check Inventory]\n",item);
+    return(1);
+}
