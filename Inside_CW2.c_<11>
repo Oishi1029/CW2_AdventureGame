@@ -1,0 +1,22 @@
+//this function prints out the inventory of the player//
+int printInventory(adventureGame *ag){
+
+    printf("<%s's inventory>\n",ag->name);
+    int i=0, j=0;
+    printf("You are carrying:\n");
+
+    //iterates over the total number of artifact//
+    for (i=0,j=0;i<ag->N_artifact;i++){
+
+        //checks if the artifact is in the inventory//
+        if (ag->artifactLoc[i]==-1){
+
+            //prints out the artifact in the inventory//
+            printf("%2d %s\n",++j,ag->artifact[i]);
+        }
+    }
+
+    //prints "nothing" if the player have no artifact in the inventory//
+    if (j==0) printf("Nothing\n");
+    return(1);
+}
