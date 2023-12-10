@@ -1,0 +1,36 @@
+//this function prints out the help menu of the game//
+void printHelp(){
+    printf("===============================================Help==========================================================\n");
+    printf("Movement command    : north, n, south, s, east, e, west, w\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Look command        : look, l\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Information command : tips, t, map, m, status, ss\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Fight command       : killMonster, killmonster, km\n");
+    printf("                    : killZombie, kill zombie, kz, killWerewolf, kill werewolf, kw\n");
+    printf("                    : killDracula, kill dracula, kdrac\n");
+    printf("                    : killBride of Dracula, kill bride of dracula, kbodrac\n");
+    printf("                    : killLizard-man, kill lizard-man, kl, killDragon, kill dragon, kdrag\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Get command         : get diamond cross, get sword, get silver spear\n");
+    printf("                    : get copper key, get bronze key, get golden chalice\n");
+    printf("                    : get elixir, get medpack, get food\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Drop command        : drop diamond cross, drop sword, drop silver spear\n");
+    printf("                    : drop copper key, drop bronze key, drop golden chalice\n");
+    printf("                    : drop elixir, drop medpack, drop food\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Inventory command   : inventory, i\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Healing command     : eat food, drink food, use food\n");
+    printf("                    : eat elixir, drink elixir, use elixir\n");
+    printf("                    : eat medpack, drink medpack, use medpack\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Unlock command      : unlock door, ud, unlock room, ur\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Exit command        : exit\n");
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("Repeat last command : <Enter>\n");
+    printf("=============================================================================================================\n");
+}
